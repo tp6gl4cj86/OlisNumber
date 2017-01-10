@@ -13,8 +13,9 @@ import android.widget.TextView;
 public class OlisNumber
 {
 
-    private static int mScreenWidth;
-    private static int mScreenHeight;
+    private static int   mScreenWidth;
+    private static int   mScreenHeight;
+    private static Float mDensity;
 
     private static float mWidth = 375;
 
@@ -34,6 +35,8 @@ public class OlisNumber
 
         mScreenWidth = Math.min(w, h);
         mScreenHeight = Math.max(w, h);
+        mDensity = context.getResources()
+                          .getDisplayMetrics().density;
     }
 
     private static float getWidthRatio()
@@ -54,6 +57,11 @@ public class OlisNumber
     public static int getPX(float px)
     {
         return (int) (px * getWidthRatio());
+    }
+
+    public static int dp2px(float dpValue)
+    {
+        return (int) (dpValue * mDensity + 0.5f);
     }
 
 
