@@ -10,6 +10,6 @@ Add dependency.
 
 ```
 dependencies {
-    compile 'tw.com.tp6gl4cj86:olis_number:2017.01.10.1'
+    compile 'tw.com.tp6gl4cj86:olis_number:1.0.0'
 }
 ```
