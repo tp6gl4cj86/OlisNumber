@@ -13,9 +13,10 @@ import android.widget.TextView;
 public class OlisNumber
 {
 
-    private static int   mScreenWidth;
-    private static int   mScreenHeight;
-    private static Float mDensity;
+    private static Context context;
+    private static int     mScreenWidth;
+    private static int     mScreenHeight;
+    private static Float   mDensity;
 
     private static float mWidth = 375;
 
@@ -28,6 +29,8 @@ public class OlisNumber
 
     public static void init(Context context)
     {
+        OlisNumber.context = context;
+
         final int w = context.getResources()
                              .getDisplayMetrics().widthPixels;
         final int h = context.getResources()
@@ -80,61 +83,62 @@ public class OlisNumber
      */
     public static void initViewGroupFromXML(View view)
     {
-        if (view != null)
-        {
-            initViewFromXML(view);
-            if (view instanceof ViewGroup)
-            {
-                final ViewGroup viewGroup = (ViewGroup) view;
-                for (int i = 0; i < viewGroup.getChildCount(); i++)
-                {
-                    initViewGroupFromXML(viewGroup.getChildAt(i));
-                }
-            }
-        }
+        initViewGroupFromXML(view, null);
+        //        if (view != null)
+        //        {
+        //            initViewFromXML(view);
+        //            if (view instanceof ViewGroup)
+        //            {
+        //                final ViewGroup viewGroup = (ViewGroup) view;
+        //                for (int i = 0; i < viewGroup.getChildCount(); i++)
+        //                {
+        //                    initViewGroupFromXML(viewGroup.getChildAt(i));
+        //                }
+        //            }
+        //        }
     }
 
     /**
      * Ignore setWH tag is "null"
      */
-    private static void initViewFromXML(View view)
-    {
-        if (view != null && view.getTag(R.id.OlisNumberInited) == null)
-        {
-            view.setTag(R.id.OlisNumberInited, "");
-
-            view.setTranslationX(OlisNumber.getPX(view.getTranslationX()));
-            view.setTranslationY(OlisNumber.getPX(view.getTranslationY()));
-
-            if (view instanceof TextView)
-            {
-                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, OlisNumber.getPX(((TextView) view).getTextSize()));
-                ((TextView) view).setCompoundDrawablePadding(OlisNumber.getPX(((TextView) view).getCompoundDrawablePadding()));
-            }
-
-            final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-            if (layoutParams != null)
-            {
-                if (view.getTag() == null || !"null".equals(view.getTag()))
-                {
-                    if (layoutParams.width > 0)
-                    {
-                        layoutParams.width = OlisNumber.getPX(layoutParams.width);
-                    }
-                    if (layoutParams.height > 0)
-                    {
-                        layoutParams.height = OlisNumber.getPX(layoutParams.height);
-                    }
-                }
-
-                if (layoutParams instanceof ViewGroup.MarginLayoutParams)
-                {
-                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(OlisNumber.getPX(getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)));
-                }
-            }
-            view.setPadding(OlisNumber.getPX(view.getPaddingLeft()), OlisNumber.getPX(view.getPaddingTop()), OlisNumber.getPX(view.getPaddingRight()), OlisNumber.getPX(view.getPaddingBottom()));
-        }
-    }
+    //    private static void initViewFromXML(View view)
+    //    {
+    //        if (view != null && view.getTag(R.id.OlisNumberInited) == null)
+    //        {
+    //            view.setTag(R.id.OlisNumberInited, "");
+    //
+    //            view.setTranslationX(OlisNumber.getPX(view.getTranslationX()));
+    //            view.setTranslationY(OlisNumber.getPX(view.getTranslationY()));
+    //
+    //            if (view instanceof TextView)
+    //            {
+    //                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, OlisNumber.getPX(((TextView) view).getTextSize()));
+    //                ((TextView) view).setCompoundDrawablePadding(OlisNumber.getPX(((TextView) view).getCompoundDrawablePadding()));
+    //            }
+    //
+    //            final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+    //            if (layoutParams != null)
+    //            {
+    //                if (view.getTag() == null || !"null".equals(view.getTag()))
+    //                {
+    //                    if (layoutParams.width > 0)
+    //                    {
+    //                        layoutParams.width = OlisNumber.getPX(layoutParams.width);
+    //                    }
+    //                    if (layoutParams.height > 0)
+    //                    {
+    //                        layoutParams.height = OlisNumber.getPX(layoutParams.height);
+    //                    }
+    //                }
+    //
+    //                if (layoutParams instanceof ViewGroup.MarginLayoutParams)
+    //                {
+    //                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(OlisNumber.getPX(getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)));
+    //                }
+    //            }
+    //            view.setPadding(OlisNumber.getPX(view.getPaddingLeft()), OlisNumber.getPX(view.getPaddingTop()), OlisNumber.getPX(view.getPaddingRight()), OlisNumber.getPX(view.getPaddingBottom()));
+    //        }
+    //    }
 
     /**
      * Ignore setWH tag is "null"
@@ -158,19 +162,19 @@ public class OlisNumber
     /**
      * Ignore setWH tag is "null"
      */
-    public static void initViewFromXML(View view, OlisNumberObject mOlisNumberObject)
+    private static void initViewFromXML(View view, OlisNumberObject mOlisNumberObject)
     {
         if (view != null && view.getTag(R.id.OlisNumberInited) == null)
         {
             view.setTag(R.id.OlisNumberInited, "");
 
-            view.setTranslationX(mOlisNumberObject.getPX(view.getTranslationX()));
-            view.setTranslationY(mOlisNumberObject.getPX(view.getTranslationY()));
+            view.setTranslationX(getPX(mOlisNumberObject, view.getTranslationX()));
+            view.setTranslationY(getPX(mOlisNumberObject, view.getTranslationY()));
 
             if (view instanceof TextView)
             {
-                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, mOlisNumberObject.getPX(((TextView) view).getTextSize()));
-                ((TextView) view).setCompoundDrawablePadding(mOlisNumberObject.getPX(((TextView) view).getCompoundDrawablePadding()));
+                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, getPX(mOlisNumberObject, ((TextView) view).getTextSize()));
+                ((TextView) view).setCompoundDrawablePadding(getPX(mOlisNumberObject, ((TextView) view).getCompoundDrawablePadding()));
             }
 
             final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -180,20 +184,56 @@ public class OlisNumber
                 {
                     if (layoutParams.width > 0)
                     {
-                        layoutParams.width = mOlisNumberObject.getPX(layoutParams.width);
+                        layoutParams.width = getPX(mOlisNumberObject, layoutParams.width);
                     }
                     if (layoutParams.height > 0)
                     {
-                        layoutParams.height = mOlisNumberObject.getPX(layoutParams.height);
+                        layoutParams.height = getPX(mOlisNumberObject, layoutParams.height);
                     }
+                }
+                else if ("StatusBar".equals(view.getTag()))
+                {
+                    layoutParams.height = getStatusBarHeight();
                 }
 
                 if (layoutParams instanceof ViewGroup.MarginLayoutParams)
                 {
-                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(mOlisNumberObject.getPX(getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)), mOlisNumberObject.getPX(getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)), mOlisNumberObject.getPX(getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)), mOlisNumberObject.getPX(getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)));
+                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(getPX(mOlisNumberObject, getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)), getPX(mOlisNumberObject, getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)), getPX(mOlisNumberObject, getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)), getPX(mOlisNumberObject, getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)));
                 }
             }
-            view.setPadding(mOlisNumberObject.getPX(view.getPaddingLeft()), mOlisNumberObject.getPX(view.getPaddingTop()), mOlisNumberObject.getPX(view.getPaddingRight()), mOlisNumberObject.getPX(view.getPaddingBottom()));
+            view.setPadding(getPX(mOlisNumberObject, view.getPaddingLeft()), getPX(mOlisNumberObject, view.getPaddingTop()), getPX(mOlisNumberObject, view.getPaddingRight()), getPX(mOlisNumberObject, view.getPaddingBottom()));
+        }
+    }
+
+    private static int statusBarHeight = -1;
+
+    public static int getStatusBarHeight()
+    {
+        if (statusBarHeight < 0)
+        {
+            if (context != null)
+            {
+                final int resourceId = context.getResources()
+                                              .getIdentifier("status_bar_height", "dimen", "android");
+                if (resourceId > 0)
+                {
+                    statusBarHeight = context.getResources()
+                                             .getDimensionPixelSize(resourceId);
+                }
+            }
+        }
+        return statusBarHeight;
+    }
+
+    private static int getPX(OlisNumberObject mOlisNumberObject, float px)
+    {
+        if (mOlisNumberObject != null)
+        {
+            return mOlisNumberObject.getPX(px);
+        }
+        else
+        {
+            return getPX(px);
         }
     }
 
