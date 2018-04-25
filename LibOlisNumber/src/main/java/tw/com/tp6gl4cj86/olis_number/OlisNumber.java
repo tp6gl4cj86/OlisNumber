@@ -180,7 +180,11 @@ public class OlisNumber
             final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             if (layoutParams != null)
             {
-                if (view.getTag() == null || !"null".equals(view.getTag()))
+                if ("StatusBar".equals(view.getTag()))
+                {
+                    layoutParams.height = getStatusBarHeight();
+                }
+                else if (view.getTag() == null || !"null".equals(view.getTag()))
                 {
                     if (layoutParams.width > 0)
                     {
@@ -190,10 +194,6 @@ public class OlisNumber
                     {
                         layoutParams.height = getPX(mOlisNumberObject, layoutParams.height);
                     }
-                }
-                else if ("StatusBar".equals(view.getTag()))
-                {
-                    layoutParams.height = getStatusBarHeight();
                 }
 
                 if (layoutParams instanceof ViewGroup.MarginLayoutParams)
