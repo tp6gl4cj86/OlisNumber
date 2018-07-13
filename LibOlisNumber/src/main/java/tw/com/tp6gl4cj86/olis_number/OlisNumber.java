@@ -42,6 +42,23 @@ public class OlisNumber
                           .getDisplayMetrics().density;
     }
 
+    public static void initLandscape(Context context, float width)
+    {
+        OlisNumber.context = context;
+        mWidth = width;
+
+        final int w = context.getResources()
+                             .getDisplayMetrics().widthPixels;
+        final int h = context.getResources()
+                             .getDisplayMetrics().heightPixels;
+
+        mScreenWidth = Math.max(w, h);
+        mScreenHeight = Math.min(w, h);
+
+        mDensity = context.getResources()
+                          .getDisplayMetrics().density;
+    }
+
     private static float getWidthRatio()
     {
         return getScreenWidth() / mWidth;
