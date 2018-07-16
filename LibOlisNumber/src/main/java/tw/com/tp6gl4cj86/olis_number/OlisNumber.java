@@ -1,9 +1,12 @@
 package tw.com.tp6gl4cj86.olis_number;
 
 import android.content.Context;
+import android.graphics.Point;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
@@ -51,6 +54,38 @@ public class OlisNumber
                              .getDisplayMetrics().widthPixels;
         final int h = context.getResources()
                              .getDisplayMetrics().heightPixels;
+
+        mScreenWidth = Math.max(w, h);
+        mScreenHeight = Math.min(w, h);
+
+        mDensity = context.getResources()
+                          .getDisplayMetrics().density;
+    }
+
+    public static void initRealLandscape(Context context, float width)
+    {
+        OlisNumber.context = context;
+        mWidth = width;
+
+        final int w;
+        final int h;
+
+        final WindowManager windowManager = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+        if (windowManager != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+        {
+            final Point screenSize = new Point();
+            windowManager.getDefaultDisplay()
+                         .getRealSize(screenSize);
+            w = screenSize.x;
+            h = screenSize.y;
+        }
+        else
+        {
+            w = context.getResources()
+                       .getDisplayMetrics().widthPixels;
+            h = context.getResources()
+                       .getDisplayMetrics().heightPixels;
+        }
 
         mScreenWidth = Math.max(w, h);
         mScreenHeight = Math.min(w, h);
