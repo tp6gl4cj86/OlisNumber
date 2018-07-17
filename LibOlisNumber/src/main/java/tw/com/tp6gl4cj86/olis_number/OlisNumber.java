@@ -211,10 +211,15 @@ public class OlisNumber
         }
     }
 
+    private static void initViewFromXML(View view, OlisNumberObject mOlisNumberObject)
+    {
+        initViewFromXML(view, mOlisNumberObject, 1);
+    }
+
     /**
      * Ignore setWH tag is "null"
      */
-    private static void initViewFromXML(View view, OlisNumberObject mOlisNumberObject)
+    private static void initViewFromXML(View view, OlisNumberObject mOlisNumberObject, float scale)
     {
         if (view != null && view.getTag(R.id.OlisNumberInited) == null)
         {
@@ -225,8 +230,8 @@ public class OlisNumber
 
             if (view instanceof TextView)
             {
-                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, getPX(mOlisNumberObject, ((TextView) view).getTextSize()));
-                ((TextView) view).setCompoundDrawablePadding(getPX(mOlisNumberObject, ((TextView) view).getCompoundDrawablePadding()));
+                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, getPX(mOlisNumberObject, ((TextView) view).getTextSize()) * scale);
+                ((TextView) view).setCompoundDrawablePadding((int) (getPX(mOlisNumberObject, ((TextView) view).getCompoundDrawablePadding()) * scale));
             }
 
             final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -240,20 +245,20 @@ public class OlisNumber
                 {
                     if (layoutParams.width > 0)
                     {
-                        layoutParams.width = getPX(mOlisNumberObject, layoutParams.width);
+                        layoutParams.width = (int) (getPX(mOlisNumberObject, layoutParams.width) * scale);
                     }
                     if (layoutParams.height > 0)
                     {
-                        layoutParams.height = getPX(mOlisNumberObject, layoutParams.height);
+                        layoutParams.height = (int) (getPX(mOlisNumberObject, layoutParams.height) * scale);
                     }
                 }
 
                 if (layoutParams instanceof ViewGroup.MarginLayoutParams)
                 {
-                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(getPX(mOlisNumberObject, getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)), getPX(mOlisNumberObject, getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)), getPX(mOlisNumberObject, getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)), getPX(mOlisNumberObject, getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)));
+                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins((int) (getPX(mOlisNumberObject, getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)) * scale), (int) (getPX(mOlisNumberObject, getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)) * scale), (int) (getPX(mOlisNumberObject, getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)) * scale), (int) (getPX(mOlisNumberObject, getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)) * scale));
                 }
             }
-            view.setPadding(getPX(mOlisNumberObject, view.getPaddingLeft()), getPX(mOlisNumberObject, view.getPaddingTop()), getPX(mOlisNumberObject, view.getPaddingRight()), getPX(mOlisNumberObject, view.getPaddingBottom()));
+            view.setPadding((int) (getPX(mOlisNumberObject, view.getPaddingLeft()) * scale), (int) (getPX(mOlisNumberObject, view.getPaddingTop()) * scale), (int) (getPX(mOlisNumberObject, view.getPaddingRight()) * scale), (int) (getPX(mOlisNumberObject, view.getPaddingBottom()) * scale));
         }
     }
 
