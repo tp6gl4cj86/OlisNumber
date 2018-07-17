@@ -135,85 +135,34 @@ public class OlisNumber
      */
     public static void initViewGroupFromXML(View view)
     {
-        initViewGroupFromXML(view, null);
-        //        if (view != null)
-        //        {
-        //            initViewFromXML(view);
-        //            if (view instanceof ViewGroup)
-        //            {
-        //                final ViewGroup viewGroup = (ViewGroup) view;
-        //                for (int i = 0; i < viewGroup.getChildCount(); i++)
-        //                {
-        //                    initViewGroupFromXML(viewGroup.getChildAt(i));
-        //                }
-        //            }
-        //        }
+        initViewGroupFromXML(view, null, 1);
     }
 
     /**
      * Ignore setWH tag is "null"
      */
-    //    private static void initViewFromXML(View view)
-    //    {
-    //        if (view != null && view.getTag(R.id.OlisNumberInited) == null)
-    //        {
-    //            view.setTag(R.id.OlisNumberInited, "");
-    //
-    //            view.setTranslationX(OlisNumber.getPX(view.getTranslationX()));
-    //            view.setTranslationY(OlisNumber.getPX(view.getTranslationY()));
-    //
-    //            if (view instanceof TextView)
-    //            {
-    //                ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, OlisNumber.getPX(((TextView) view).getTextSize()));
-    //                ((TextView) view).setCompoundDrawablePadding(OlisNumber.getPX(((TextView) view).getCompoundDrawablePadding()));
-    //            }
-    //
-    //            final ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-    //            if (layoutParams != null)
-    //            {
-    //                if (view.getTag() == null || !"null".equals(view.getTag()))
-    //                {
-    //                    if (layoutParams.width > 0)
-    //                    {
-    //                        layoutParams.width = OlisNumber.getPX(layoutParams.width);
-    //                    }
-    //                    if (layoutParams.height > 0)
-    //                    {
-    //                        layoutParams.height = OlisNumber.getPX(layoutParams.height);
-    //                    }
-    //                }
-    //
-    //                if (layoutParams instanceof ViewGroup.MarginLayoutParams)
-    //                {
-    //                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(OlisNumber.getPX(getLeftMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getTopMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getRightMargin((ViewGroup.MarginLayoutParams) layoutParams)), OlisNumber.getPX(getBottomMargin((ViewGroup.MarginLayoutParams) layoutParams)));
-    //                }
-    //            }
-    //            view.setPadding(OlisNumber.getPX(view.getPaddingLeft()), OlisNumber.getPX(view.getPaddingTop()), OlisNumber.getPX(view.getPaddingRight()), OlisNumber.getPX(view.getPaddingBottom()));
-    //        }
-    //    }
+    public static void initViewGroupFromXML(View view, float scale)
+    {
+        initViewGroupFromXML(view, null, scale);
+    }
 
     /**
      * Ignore setWH tag is "null"
      */
-    public static void initViewGroupFromXML(View view, OlisNumberObject mOlisNumberObject)
+    public static void initViewGroupFromXML(View view, OlisNumberObject mOlisNumberObject, float scale)
     {
         if (view != null)
         {
-            initViewFromXML(view, mOlisNumberObject);
+            initViewFromXML(view, mOlisNumberObject, scale);
             if (view instanceof ViewGroup)
             {
                 final ViewGroup viewGroup = (ViewGroup) view;
                 for (int i = 0; i < viewGroup.getChildCount(); i++)
                 {
-                    initViewGroupFromXML(viewGroup.getChildAt(i), mOlisNumberObject);
+                    initViewGroupFromXML(viewGroup.getChildAt(i), mOlisNumberObject, scale);
                 }
             }
         }
-    }
-
-    private static void initViewFromXML(View view, OlisNumberObject mOlisNumberObject)
-    {
-        initViewFromXML(view, mOlisNumberObject, 1);
     }
 
     /**
