@@ -1,14 +1,13 @@
+apply plugin: 'bintray-release'
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
-def version = "3.0.6"
+def version = "4.0.0"
 
 android {
-	compileSdkVersion 27
-	buildToolsVersion "27.0.3"
+	compileSdkVersion 28
 	defaultConfig {
 		minSdkVersion 16
-		targetSdkVersion 27
+		targetSdkVersion 28
 		versionCode 1
 		versionName version
 	}
