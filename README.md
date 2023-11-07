@@ -6,10 +6,4 @@ OlisNumber
 
 # Usage
 
-Add dependency.
-
-```
-dependencies {
-    compile 'tw.com.tp6gl4cj86:olis_number:4.0.0'
-}
-```
+https://jitpack.io/#tp6gl4cj86/OlisNumber
