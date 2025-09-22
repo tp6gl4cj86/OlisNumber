@@ -109,6 +109,11 @@ public class OlisNumber
         return mScreenHeight;
     }
 
+    public static float getDensity()
+    {
+        return mDensity;
+    }
+
     public static int getPX(float px)
     {
         return (int) (px * getWidthRatio());
