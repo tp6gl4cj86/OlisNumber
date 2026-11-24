@@ -18,8 +18,9 @@ fun Float.px(): Int {
     return OlisNumber.getPX(this)
 }
 
-fun Float.dp2px(): Float {
-    return this * OlisNumber.getDensity() + 0.5f
+/** 與 OlisNumber.dp2px 相同（四捨五入成整數 px） */
+fun Float.dp2px(): Int {
+    return OlisNumber.dp2px(this)
 }
 
 fun Float.px2dp(): Float {
